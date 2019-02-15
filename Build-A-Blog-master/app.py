@@ -7,13 +7,25 @@ wsgi_app = app.wsgi_app
 # thePost = " "
 
 allPosts = []
+buildContent = ""
 
 @app.route('/')
 def hello():
 
 	url = url_for('createBlog')
-	link = '<a href="' + url + '">Create a blog</a>'
+	link = '<a href="' + url + '">Create a blog post</a>'
+
+	# # scroll through dictionary and print out posts.
+	# for inPost in allPosts:
+	# 	buildContent += "'<h2>" + inPost['pTitle'] + "</h2>"
+	# 	buildContent += "<div>" + inPost['pPost'] + "</div> <br /><br /><br />"
+
+
 	return link;
+
+
+
+
 
 
 @app.route('/createBlog', methods=['GET', 'POST'])
@@ -53,7 +65,7 @@ def readBlog():
 
 	# scroll through dictionary and print out posts.
 	for inPost in allPosts:
-		buildContent += "<h2>" + inPost['pTitle'] + "</h2>"
+		buildContent += "'<h2>'" + inPost['pTitle'] + "'</h2>'"
 		buildContent += "<div>" + inPost['pPost'] + "</div> <br /><br /><br />"
 		
 	return render_template('blogPost.html', buildContent = buildContent)
